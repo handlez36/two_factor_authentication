@@ -30,6 +30,7 @@ class Devise::TwoFactorAuthenticationController < DeviseController
     warden.session(resource_name)[TwoFactorAuthentication::NEED_AUTHENTICATION] = false
     # For compatability with devise versions below v4.2.0
     # https://github.com/plataformatec/devise/commit/2044fffa25d781fcbaf090e7728b48b65c854ccb
+    puts "Devise Version is #{Devise::VERSION}"
     if Devise::VERSION.to_f >= 4.2
       bypass_sign_in(resource, scope: resource_name)
     else
