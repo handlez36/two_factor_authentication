@@ -8,6 +8,8 @@ class Devise::TwoFactorAuthenticationController < DeviseController
   end
 
   def update
+    puts "In 2FA Update..."
+    puts "#{params[:code]}"
     render :show and return if params[:code].nil?
 
     if resource.authenticate_otp(params[:code])
@@ -25,6 +27,7 @@ class Devise::TwoFactorAuthenticationController < DeviseController
   private
 
   def after_two_factor_success_for(resource)
+    puts "In After Two Factor Success For..."
     set_remember_two_factor_cookie(resource)
 
     warden.session(resource_name)[TwoFactorAuthentication::NEED_AUTHENTICATION] = false
